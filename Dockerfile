@@ -1,10 +1,11 @@
 FROM ubuntu:latest
-ENV TZ=Europe/Moscow
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get update
-RUN apt-get install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools -y
+ENV TZ=Europe/Moscow   
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone   
+RUN apt-get update   
+RUN apt-get install qt5-default -y   
+RUN apt-get install qtbase5-dev -y   
+RUN apt-get install qt5-qmake   
 RUN apt-get install build-essential -y
-RUN apt-get install -y sqlite3 libsqlite3-dev
 EXPOSE 33333
 WORKDIR /root/
 RUN mkdir Gunin_221_353
