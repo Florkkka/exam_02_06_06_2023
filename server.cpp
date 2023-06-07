@@ -38,8 +38,6 @@ void Server::handleData()
 
         if (command == "start_game") {
             qDebug() << "User joined the game:" << argument;
-            // Здесь можно добавить логику для добавления пользователя в игру
-            // Например, создать объект игрока и добавить его в список игроков
             Player player;
             player.login = argument;
             player.socket = socket;
@@ -53,9 +51,7 @@ void Server::handleData()
         else if (command == "move") {
             if (m_players.size() == 2) {
                 qDebug() << "Move received from:" << argument;
-                // Здесь можно добавить логику для выполнения хода
-                // Например, вызвать функцию, которая сравнит значение функции двух аргументов
-                // и определит победителя
+      
                 int result = calculateMove(argument);
 
                 // Отправляем результат хода обратно клиенту
@@ -68,21 +64,15 @@ void Server::handleData()
         }
         else if (command == "stop_game") {
             qDebug() << "Game stopped by user:" << argument;
-            // Здесь можно добавить логику для завершения игры по запросу игрока
-            // Например, отправить сообщение об окончании игры и очистить список игроков
-            // и/или выполнить другие необходимые действия
             m_players.clear();
         }
         else if (command == "stats") {
             qDebug() << "Stats requested by user:" << argument;
-            // Здесь можно добавить логику для просмотра статистики
-            // Например, записать статистику в текстовый файл
             QString filename = "D:/stats.txt";
             QFile file(filename);
             if (file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
                 QTextStream stream(&file);
                 stream << "Stats requested by user: " << argument << "\n";
-                // Запишите дополнительную статистику, если необходимо
                 file.close();
             } else {
                 qDebug() << "Failed to open file:" << filename;
@@ -101,15 +91,11 @@ void Server::handleDisconnect()
 
 int Server::calculateMove(const QString& argument)
 {
-    // Здесь можно реализовать вашу функцию для вычисления значения хода
-    // Верните значение функции, которое будет использоваться для определения победителя
-    // В данном случае, просто возвращаем длину аргумента
+    // Возвращаем длину аргумента
     return argument.length();
 }
 
 void Server::startGame()
 {
     qDebug() << "Starting the game!";
-    // Здесь можно добавить код для начала игры
-    // Например, отправить сообщение игрокам о начале игры
 }
